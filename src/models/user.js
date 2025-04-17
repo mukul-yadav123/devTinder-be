@@ -23,7 +23,7 @@ const userSchema = mongoose.Schema({
     values: ['Male','Female','Others'],
     message : `{VALUE} is not a valid Gender`    
     }},
-    photoUrl:{type:String,
+    photoUrl:{type:String,default:"https://i.pinimg.com/736x/29/d2/7f/29d27f01cb33d753e6edca34740f8a0e.jpg",
         validate(value)
         {
             if(!validator.isURL(value))
