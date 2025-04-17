@@ -36,7 +36,7 @@ authRouter.post('/login',async(req,res) => {
         {
             const token = await jwt.sign({_id:user._id},'Dev@Tinder',{expiresIn: "2d"})
             res.cookie('token',token)
-            res.send("Login Successfull")
+            res.json({user,messsage:'Login Successful'})
         }
         else{
             throw new Error('Invalid Credentials')
