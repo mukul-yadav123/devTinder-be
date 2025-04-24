@@ -1,6 +1,6 @@
 const express = require('express');
 const { userAuth } = require('../middlewares/Auth');
-const {ConnectionRequest} = require('../models/connectionRequest');
+const ConnectionRequest = require('../models/connectionRequest');
 const User = require('../models/user');
 const userRouter = express.Router();
 
@@ -66,7 +66,7 @@ try {
         hideUsersFromFeed.add(request.toUserId)
     })
 
-    const users = await User.find({
+    const users = await User?.find({
         $and: [
        { _id:{$nin: Array.from(hideUsersFromFeed)}},
        {_id: {$ne: loggedInUser._id}}

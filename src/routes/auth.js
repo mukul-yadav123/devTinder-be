@@ -14,8 +14,10 @@ authRouter.post('/signup', async(req,res) => {
         const user = new User({
             firstName,lastName,emailId,password:passwordHash
         })
-        await user.save()
-        res.send('User added successfully')
+        const savedUser = await user.save()
+        const token = await jwt.sign({_id:savedUser._id},'Dev@Tinder',{expiresIn: "2d"})
+        res.cookie('token',token)
+        res.json({msg: 'User added successfully',data:savedUser})
     }
     catch(err){
         res.status(400).send('Error saving the user' + err.message)
