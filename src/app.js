@@ -7,6 +7,7 @@ const authRouter = require('./routes/auth')
 const profileRouter = require('./routes/profileRoute')
 const requestRouter = require('./routes/requests');
 const userRouter = require('./routes/userRouter');
+require('dotenv').config()
 
 app.use(cors({
     origin:"http://localhost:5173",
@@ -22,7 +23,7 @@ app.use('/',userRouter)
 connectDb()
     .then(() => {
         console.log('Database connected')
-        app.listen(3000,() => {
+        app.listen(process.env.PORT,() => {
             console.log('server is listening on port 3000')
         })
     })
