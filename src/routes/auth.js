@@ -15,7 +15,7 @@ authRouter.post('/signup', async(req,res) => {
             firstName,lastName,emailId,password:passwordHash
         })
         const savedUser = await user.save()
-        const token = await jwt.sign({_id:savedUser._id},'Dev@Tinder',{expiresIn: "2d"})
+        const token = await jwt.sign({_id:savedUser._id},process.env.SECRET_KEY,{expiresIn: "2d"})
         res.cookie('token',token)
         res.json({msg: 'User added successfully',data:savedUser})
     }
@@ -36,7 +36,7 @@ authRouter.post('/login',async(req,res) => {
         const isPasswordValid = await bcrypt.compare(password,user.password);
         if(isPasswordValid)
         {
-            const token = await jwt.sign({_id:user._id},'Dev@Tinder',{expiresIn: "2d"})
+            const token = await jwt.sign({_id:user._id},process.env.SECRET_KEY,{expiresIn: "2d"})
             res.cookie('token',token)
             res.json({user,messsage:'Login Successful'})
         }
